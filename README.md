@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aptos x402v2 Demo
+
+A high-performance demonstration of **Aptos x402v2** (Pay-per-request API protocol) using USDC micropayments on Aptos Testnet.
+
+## Overview
+
+This repository demonstrates how to integrate the `aptos-x402` protocol to protect API endpoints with on-chain payments. Users pay a small amount of USDC for each request, which is then verified by the backend before releasing the data.
+
+### Features
+
+- **Micropayments**: Native USDC payments on Aptos for API access.
+- **Protected Routes**: Secure Next.js API routes protected by `aptos-x402`.
+- **Modern UI**: Built with Next.js 15, Tailwind CSS, and `next-themes` for a premium dark mode experience.
+- **Client-Side Automation**: Uses `aptos-x402` client SDK to handle payment flows seamlessly.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- An Aptos wallet with Testnet USDC (or a private key for automation)
+
+### Environment Setup
+
+Create a `.env.local` file in the root directory:
+
+```bash
+NEXT_PUBLIC_SENDER_PRIVATE_KEY=your_testnet_private_key
+NEXT_PUBLIC_NETWORK=testnet
+```
+
+> [!IMPORTANT]
+> For this demo, we use a sender private key client-side to automate the payment flow for testing. In a production app, this would be handled by a user's wallet.
+
+### Installation
+
+```bash
+npm install
+```
+
+### Running Locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Architecture
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Client**: Initiates a request to a protected endpoint.
+2. **Server**: Returns a `402 Payment Required` status with a payment challenge.
+3. **Client**: Executes the USDC transfer on Aptos Testnet.
+4. **Client**: Re-submits the request with the transaction hash.
+5. **Server**: Verifies the transaction on-chain and returns the data (e.g., Weather Data).
 
-## Learn More
+## Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework**: [Next.js](https://nextjs.org/)
+- **Blockchain**: [Aptos](https://aptos.dev/)
+- **Protocol**: [aptos-x402](https://www.npmjs.com/package/aptos-x402)
+- **Styling**: Vanilla CSS / Tailwind CSS
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
