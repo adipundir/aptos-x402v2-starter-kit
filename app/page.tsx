@@ -5,8 +5,10 @@ import WeatherClient from "./components/WeatherClient";
 export default function Home() {
   return (
     <div className="page-container">
-      <div className="header-controls">
+      <div className="social-links-container">
         <SocialLinks />
+      </div>
+      <div className="theme-toggle-container">
         <ThemeToggle />
       </div>
 

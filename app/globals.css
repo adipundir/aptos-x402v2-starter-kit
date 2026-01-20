@@ -68,14 +68,11 @@ body {
   background: inherit;
 }
 
-/* Header Controls Styles */
-.header-controls {
+/* Social Links Container - Top Left */
+.social-links-container {
   position: absolute;
   top: 20px;
   left: 20px;
-  display: flex;
-  gap: 12px;
-  align-items: center;
 }
 
 .social-links {
@@ -100,6 +97,13 @@ body {
 .social-link:hover {
   background: var(--foreground);
   color: var(--background);
+}
+
+/* Theme Toggle Container - Top Right */
+.theme-toggle-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 .theme-toggle {
